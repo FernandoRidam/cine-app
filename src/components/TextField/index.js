@@ -16,8 +16,8 @@ export function TextField({ placeholder, icon, iconFunction }) {
               onClick={ iconFunction }
               className="icon-button"
             >
-            { icon }
-          </div>
+              { icon }
+            </div>
           : <></>
       }
     </div>

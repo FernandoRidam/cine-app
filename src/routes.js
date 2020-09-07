@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   BrowserRouter,
   Switch,
@@ -16,16 +17,16 @@ import {
 
 export default function Routes() {
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/movies" />
+        </Route>
 
-        <Switch>
-          <Route path="/">
-            <Redirect to="/movies" exact component={ Main } />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </>
+        <Route path="/movies" exact component={ Main }/>
+      </Switch>
+
+      <Navbar />
+    </BrowserRouter>
   );
 }

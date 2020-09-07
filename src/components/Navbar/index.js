@@ -22,9 +22,9 @@ export function Navbar() {
   async function search() {};
 
   return (
-    <div className="navbar">
+    <div className="navbar noselect">
       <a href="/">
-        <img className="logo" src={ logo } alt="Cine App"/>
+        <img className="logo img-not-drag" src={ logo } alt="Cine App"/>
       </a>
 
       <TextField
@@ -38,6 +38,7 @@ export function Navbar() {
           {
             navbarRoutes.map( route =>
               <Route
+                key={ route.path }
                 route={ route }
               />
             )
@@ -62,7 +63,7 @@ const Route = withRouter(({ route, history }) => {
   return (
     <li
       onClick={() => handleNavigation( route.path )}
-      className={ verifySelected( route.path ) ? 'route selected' : 'route'}
+      className={ verifySelected( route.path ) ? 'route noselect selected' : 'route noselect'}
     >
       <span>{ route.label }</span>
     </li>
