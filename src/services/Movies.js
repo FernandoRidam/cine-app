@@ -36,7 +36,7 @@ export async function discover() {
   try {
     const { data } = await api.get('/movies/discover');
 
-    return data;
+    return data.results;
   } catch ( error ) {
     return error;
   }
