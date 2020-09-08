@@ -17,7 +17,7 @@ export function CardsBanner({ trendings, genres }) {
   const startupScreen = (
     <div className="card-banner card-banner-logo">
       <img
-        className="logo-banner"
+        className="logo-banner img-not-drag"
         src={ logo }
       />
     </div>
@@ -25,7 +25,7 @@ export function CardsBanner({ trendings, genres }) {
 
   function getGenresById( id ) {
     const genre = genres.find( genre => {
-      return genre.id === id
+      return genre.id === id;
     });
 
     return genre.name;
@@ -67,11 +67,11 @@ export function CardsBanner({ trendings, genres }) {
                   <div className="movie-genres">
                     {
                       trending.genre_ids.map(( id, index ) => (
-                        <>
+                        <div key={ id }>
                           <span className="genre">{ getGenresById( id )}</span>
 
                           <span className="genre-separetor">{`${ index < trending.genre_ids.length - 1 ? '|' : ''}`}</span>
-                        </>
+                        </div>
                       ))
                     }
                   </div>

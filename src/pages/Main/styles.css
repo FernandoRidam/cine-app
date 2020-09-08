@@ -1,6 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.popular-title {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 30px;
+}
+
+.popular-title span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #FFF;
 }

@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom';
 
 import {
-  Navbar
+  Navbar,
+  Footer,
 } from './components';
 
 import {
@@ -27,6 +28,8 @@ export default function Routes() {
       </Switch>
 
       <Navbar />
+
+      <Footer />
     </BrowserRouter>
   );
 }
