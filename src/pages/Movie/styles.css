@@ -1,0 +1,22 @@
+.synopsis {
+  display: flex;
+  flex-direction: column;
+  width: 1160px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.synopsis-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFF;
+  margin-left: -15px;
+}
+
+.synopsis-text {
+  font-size: 22px;
+  font-weight: 300;
+  color: #FFF;
+  margin-top: 20px;
+}
