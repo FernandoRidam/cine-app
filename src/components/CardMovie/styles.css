@@ -10,10 +10,18 @@
   box-shadow: 0 0 10px #000;
 
   transition: all .2s;
+
+  cursor: pointer;
 }
 
 .card-movie:hover {
   box-shadow: 0 0 15px #000;
+
+  transition: all .2s;
+}
+
+.card-movie:active {
+  opacity: .8;
 
   transition: all .2s;
 }

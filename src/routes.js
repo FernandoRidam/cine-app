@@ -14,6 +14,7 @@ import {
 
 import {
   Main,
+  Movie,
 } from './pages';
 
 export default function Routes() {
@@ -25,6 +26,7 @@ export default function Routes() {
         </Route>
 
         <Route path="/movies" exact component={ Main }/>
+        <Route path="/movies/:id" exact component={ Movie }/>
       </Switch>
 
       <Navbar />

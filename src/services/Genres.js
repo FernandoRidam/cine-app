@@ -12,7 +12,7 @@ export async function index() {
   }
 };
 
-export async function show( id ) {
+export async function showGenre( id ) {
   try {
     const { data } = await api.get(`/genres/${ id }`);
 
