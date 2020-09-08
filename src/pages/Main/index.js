@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import FlatList from 'flatlist-react';
+import {
+  useStore
+} from '../../store';
 
 import {
   index,
@@ -16,12 +18,12 @@ import {
 import './styles.css';
 
 export function Main() {
+  const { movies } = useStore();
+
   const [ trendings, setTrendings ] = useState([]);
   const [ genres, setGenres ] = useState([]);
   const [ discovers, setDiscovers ] = useState([]);
-
-  const [ page, setPage ] = useState(1);
-  const [ pages, setPages ] = useState([]);
+  const [ searchMovies, setSearchMovies ] = useState([]);
 
   async function getTrendings() {
     const trendings = await trending();
@@ -46,12 +48,25 @@ export function Main() {
     });
 
     setDiscovers( moviesByGenre );
-    console.log( moviesByGenre );
+  };
+
+  async function getSearchMovies( searchMovies ) {
+    let moviesByGenre = [];
+
+    genres.forEach( genre => {
+      moviesByGenre.push({ genre: genre.name, movies: searchMovies.filter( movie => {
+        return movie.genre_ids.some( id => genre.id === id );
+      })});
+    });
+
+    setSearchMovies( moviesByGenre );
   };
 
   useEffect(() => {
     getGenres();
+  }, []);
 
+  useEffect(() => {
     getTrendings();
   }, []);
 
@@ -61,27 +76,45 @@ export function Main() {
     }
   }, [ genres ]);
 
+  useEffect(() => {
+    if( movies.data.length > 0 ) {
+      getSearchMovies( movies.data );
+    }
+  }, [ movies.data ]);
+
   return (
     <div className="container noselect">
-      <CardsBanner
-        trendings={ trendings }
-        genres={ genres }
-      />
+      <div className={`banner ${ !movies.data.length > 0 ? 'banner-show' : ''}`}>
+        <CardsBanner
+          trendings={ trendings }
+          genres={ genres }
+        />
+      </div>
 
-      <div className="popular-title">
-        <span>Mais Populares</span>
+      <div className="row-title">
+        <span>{ movies.data.length > 0 ? 'Resultado da Busca' : 'Mais Populares'}</span>
       </div>
 
       {
-        discovers.map(( discover, index ) =>
-          discover.movies.length > 0
-            ? <GenreRow
-                key={ discover }
-                name={ discover.genre }
-                movies={ discover.movies }
-              />
-            : <></>
-        )
+        movies.data.length > 0
+          ? searchMovies.map(( discover, index ) =>
+              discover.movies.length > 0
+                ? <GenreRow
+                    key={ discover.genre }
+                    name={ discover.genre }
+                    movies={ discover.movies }
+                  />
+                : <></>
+            )
+          : discovers.map(( discover, index ) =>
+              discover.movies.length > 0
+                ? <GenreRow
+                    key={ discover.genre }
+                    name={ discover.genre }
+                    movies={ discover.movies }
+                  />
+                : <></>
+            )
       }
     </div>
   );

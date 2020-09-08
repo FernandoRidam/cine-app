@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
+
+import {
+  useStore
+} from '../../store';
 
 import {
   navbarRoutes,
@@ -19,7 +23,17 @@ import logo from '../../assets/logo.png';
 import './styles.css';
 
 export function Navbar() {
-  async function search() {};
+  const [ searchText, setSearchText ] = useState('');
+
+  const { movies } = useStore();
+
+   async function search() {
+    if( searchText !== '') {
+      await movies.searchMovies( searchText );
+    } else {
+      movies.clearSearch();
+    }
+  };
 
   return (
     <div className="navbar noselect">
@@ -28,6 +42,8 @@ export function Navbar() {
       </a>
 
       <TextField
+        value={ searchText }
+        change={ event => setSearchText( event.target.value )}
         placeholder="Encontre seus filmes favoritos…"
         icon={ <BiSearchAlt className="search"/> }
         iconFunction={ search }

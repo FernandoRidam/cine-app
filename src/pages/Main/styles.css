@@ -6,13 +6,32 @@
   width: 100%;
 }
 
-.popular-title {
+.banner {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0;
+  width: 1115px;
+  height: 0;
+
+  transition: all .4s;
+}
+
+.banner-show {
+  margin-top: 75px;
+  width: 1115px;
+  height: 515px;
+
+  transition: all .4s;
+}
+
+.row-title {
   width: 100%;
   max-width: 1200px;
   margin-top: 30px;
 }
 
-.popular-title span {
+.row-title span {
   font-size: 22px;
   font-weight: bold;
   color: #FFF;

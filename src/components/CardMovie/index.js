@@ -1,12 +1,29 @@
 import React from 'react';
 
+import { withRouter } from 'react-router-dom';
+
 import moment from 'moment';
 
 import './styles.css';
 
 export function CardMovie({ movie }) {
   return (
-    <li className="card-movie">
+    <Card
+      movie={ movie }
+    />
+  );
+};
+
+const Card = withRouter(({ movie, history }) => {
+  function handleNavigation( path ) {
+    history.push( path );
+  };
+
+  return (
+    <li
+      className="card-movie"
+      onClick={() => handleNavigation(`/movies/${ movie.id }`)}
+    >
       <div className="cover">
         <img
           className="image"
@@ -24,4 +41,4 @@ export function CardMovie({ movie }) {
       </div>
     </li>
   );
-};
+});

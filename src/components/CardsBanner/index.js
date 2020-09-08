@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 
 import moment from 'moment';
 
@@ -12,6 +12,15 @@ import './styles.css';
 import './styles.scss';
 
 export function CardsBanner({ trendings, genres }) {
+  return (
+    <Slider
+      trendings={ trendings }
+      genres={ genres }
+    />
+  );
+};
+
+const Slider = memo(({ trendings, genres }) => {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   const startupScreen = (
@@ -36,7 +45,6 @@ export function CardsBanner({ trendings, genres }) {
       startupScreen={startupScreen}
       className="slider slider-scss"
       bullets={ false }
-      // organicArrows={ false }
       play={ true }
       interval={ 8000 }
     >
@@ -46,7 +54,7 @@ export function CardsBanner({ trendings, genres }) {
             key={ trending.id }
             className="card-banner"
             style={{
-              backgroundImage: "url(" + `http://image.tmdb.org/t/p/w1280${ trending.backdrop_path }` + ")",
+              backgroundImage: "url(" + `http://image.tmdb.org/t/p/w1280${ trending?.backdrop_path }` + ")",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -55,28 +63,28 @@ export function CardsBanner({ trendings, genres }) {
               <div className="movie">
                 <img
                   className="movie-poster img-not-drag"
-                  src={`http://image.tmdb.org/t/p/w1280${ trending.poster_path }`}
-                  alt={ trending.title }
+                  src={`http://image.tmdb.org/t/p/w1280${ trending?.poster_path }`}
+                  alt={ trending?.title }
                 />
 
                 <div className="movie-info">
-                  <span className="movie-title">{ trending.title }</span>
+                  <span className="movie-title">{ trending?.title }</span>
 
-                  <span className="movie-subtitle">{ trending.original_title }</span>
+                  <span className="movie-subtitle">{ trending?.original_title }</span>
 
                   <div className="movie-genres">
                     {
-                      trending.genre_ids.map(( id, index ) => (
-                        <div key={ id }>
+                      trending?.genre_ids.map(( id, index ) => (
+                        <div key={`${ trending.id }.${  id  }`}>
                           <span className="genre">{ getGenresById( id )}</span>
 
-                          <span className="genre-separetor">{`${ index < trending.genre_ids.length - 1 ? '|' : ''}`}</span>
+                          <span className="genre-separetor">{`${ index < trending?.genre_ids.length - 1 ? '|' : ''}`}</span>
                         </div>
                       ))
                     }
                   </div>
 
-                  <span className="release-date">{ moment( trending.release_date ).format('ll')}</span>
+                  <span className="release-date">{ moment( trending?.release_date ).format('ll')}</span>
                 </div>
               </div>
             </div>
@@ -85,4 +93,4 @@ export function CardsBanner({ trendings, genres }) {
       }
     </AutoplaySlider>
   );
-};
+});

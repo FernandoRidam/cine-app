@@ -16,7 +16,7 @@ export async function search( query ) {
   try {
     const { data } = await api.get(`/movies/search/${ query }`);
 
-    return data;
+    return data.results;
   } catch ( error ) {
     return error;
   }
